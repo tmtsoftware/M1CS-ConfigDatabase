@@ -57,7 +57,7 @@ class WHEntry {
 ///
 function createWhEntry(segName: utils.SegName): WHEntry =
   new {
-    segEId = EIdDictionary.eidDictionary[segName].mirrorCellEId
+    segEId = EIdDictionary.eIdDictionary[segName].mirrorCellEId
     whs = new {
       for (i in IntSeq(1, highWHId)) {
         new WHParams {

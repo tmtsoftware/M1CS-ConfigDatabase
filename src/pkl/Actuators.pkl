@@ -1,6 +1,5 @@
 module m1cs.Actuators
 
-import "config/MotorConfig.pkl"
 import "config/ActuatorBase.pkl"
 
 ///
