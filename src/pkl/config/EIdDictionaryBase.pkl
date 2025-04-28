@@ -1,0 +1,37 @@
+module m1cs.EIdDictionaryBase
+
+import "../utils.pkl"
+///
+/// This config file maps segment name to EIds for actuators and lower segment box
+
+typealias EId = String
+typealias EIdDictionary = Mapping<utils.SegName, DicEntry>
+
+hidden const DEFAULT_EId = "0"
+
+function fakeMirrorCellId(segName: utils.SegName):String = segName + ":cellId"
+
+function createFakeEntry(segName: utils.SegName): DicEntry =
+  new {
+    mirrorCellEId = segName + ":cellId"
+    actuator1EId = segName + ":EidAct1"
+    actuator2EId = segName + ":EidAct2"
+    actuator3EId = segName + ":EidAct3"
+  }
+
+class DicEntry {
+  mirrorCellEId: EId = DEFAULT_EId
+  actuator1EId: EId = DEFAULT_EId
+  actuator2EId: EId = DEFAULT_EId
+  actuator3EId: EId = DEFAULT_EId
+}
+
+///
+/// This constructs the dictionary as a map keyed by SegName with DicEntries
+///
+hidden defaultEIdDictionary: EIdDictionary  = new {
+  for (e in utils.segmentList) {
+    [e] = createFakeEntry(e)
+  }
+}
+

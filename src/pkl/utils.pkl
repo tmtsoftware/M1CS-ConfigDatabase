@@ -1,0 +1,132 @@
+
+/// HERE IS WHERE THE LIST OF SECTORS IS SET TO DETERMINE THE LENGHT OF CONFIG FILES
+const sectors:List<String> = List("A", "B") //"C", "D", "E", "F")
+
+/// HERE IS WHERE THE NUMBER OF SEGEMNTS IN A SECTOR IS SET
+const SEGMENTS_PER_SECTOR:Int = 2 // 82
+const TOTAL_NUMBER_SEGMENTS = sectors.length * SEGMENTS_PER_SECTOR
+
+const SEGMENT_NAME_LENGTH:Int = 3
+///
+/// Returns the letter of a segmentId ("A23")
+///
+function sectorLetter(id: SegName): String =
+  if (id.length <= 3)
+    id.take(1)
+  else
+    throw("Segment ID must be <= \(SEGMENT_NAME_LENGTH)")
+
+///
+/// Returns the number of the sector (1-6)
+///
+function sectorNumber(id: SegName): Int =
+  let (sLetter = sectorLetter(id))
+    sectors.indexOf(sLetter) + 1
+
+const segmentList:List<String> = segments(sectors, SEGMENTS_PER_SECTOR)
+
+///
+/// Checks that a segName had a valid sector (A-F)
+///
+const function checkSegNameSector(id: String): Boolean = sectors.contains(id.take(1))
+
+/// Verify that a segment ID mirror number is within range (1-82)
+///
+const function checkSectorMirror(id: String): Boolean =
+  id.drop(1).toInt() <= SEGMENTS_PER_SECTOR && id.drop(1).toInt() >= 1
+
+const function checkSegName(id: String): Boolean = checkSegNameSector(id) && checkSectorMirror(id)
+
+typealias SegName = String((str) -> checkSegName(str))
+
+///
+/// Returns a list of SegName for sectors and maxMirrors in each sector
+const function segments(sectors: List<String>, maxMirrors: Int) = new Dynamic {
+  for (s in sectors) {
+    for (m in IntSeq(1, maxMirrors)) {
+      s + m.toString()
+    }
+  }
+}.toList()
+
+///
+/// Returns the number of the mirror in a SegName (1-82)
+///
+function mirrorNumber(id: SegName): Int =
+  if (id.length <= SEGMENT_NAME_LENGTH)
+    id.drop(1).toInt()
+  else
+    throw("Segment ID must be a sector + number less than or equal 82")
+
+
+///
+/// Returns the global segment number (1-492) for a segName
+///
+function segNum(id: SegName): Int =
+  if (checkSegName(id))
+    let (sNumber = sectorNumber(id))
+      (sNumber - 1) * SEGMENTS_PER_SECTOR + mirrorNumber(id)
+  else
+    throw("Segment ID must be a sector + number less than or equal 82")
+
+//
+// Returns the SegName for a segment number
+//
+function getNameFromNum(segNum: Int): String =
+  let (sector:Int = (segNum - 1) ~/ SEGMENTS_PER_SECTOR)
+    let(num:Int = segNum % SEGMENTS_PER_SECTOR)
+      sectors[sector] + (if (num == 0) SEGMENTS_PER_SECTOR else num).toString()
+
+const ACTUATORS_PER_SEGMENT:Int = 3
+const MAX_GLOBAL_ACTUATOR_NUMBER = ACTUATORS_PER_SEGMENT * TOTAL_NUMBER_SEGMENTS
+
+typealias ActNum = Int((id) -> id >= 1 && id <= ACTUATORS_PER_SEGMENT)
+
+///
+/// Returns a global actuator number for a SegName and a local actuator number (1-3) ActNum
+function globalActuatorNumber(id: SegName, actNum: ActNum): Int =
+  let (globalSegNum = segNum(id))
+    (globalSegNum - 1) * ACTUATORS_PER_SEGMENT + actNum
+
+///
+/// Returns a local actuator number for a global actuator number
+///
+function localActuatorNumber(globalActuatorNumber): ActNum =
+  let (mod = globalActuatorNumber % ACTUATORS_PER_SEGMENT)
+    if (mod == 0) ACTUATORS_PER_SEGMENT else mod
+
+/// Sensors
+const SENSORS_PER_SEGMENT:Int = 12
+const SENSORS_PER_SECTOR:Int = SENSORS_PER_SEGMENT * SEGMENTS_PER_SECTOR
+const MAX_GLOBAL_SENSOR_NUMBER = SENSORS_PER_SEGMENT * TOTAL_NUMBER_SEGMENTS
+
+typealias SensorNum = Int((id) -> id >= 1 && id <= SENSORS_PER_SEGMENT)
+typealias GlobalSensorNum = Int((id) -> id >= 1 && id <= MAX_GLOBAL_SENSOR_NUMBER)
+
+///
+/// Returns the GlobalSensorNumber (1-5904) given a segName and local Sensor Number
+function globalSensorNumber(id: SegName, sensorNum: SensorNum): GlobalSensorNum =
+  let (globalSegNum = segNum(id))
+    (globalSegNum - 1) * SENSORS_PER_SEGMENT + sensorNum
+
+
+///
+/// Returns the segName for an absolute sensor number
+///
+function globalSensorNumberToSeg(sensorNum: Int): SegName =
+  let(segInt = (sensorNum - 1) ~/ SENSORS_PER_SEGMENT)
+      getNameFromNum(segInt + 1)
+
+///
+/// Returns a local sensor number from a global sensor number
+///
+function globalSensorNumberToLocalSensorNumber(sensorNum: GlobalSensorNum): SensorNum =
+  let (sensInt = (sensorNum) % SENSORS_PER_SEGMENT)
+    if (sensInt == 0) SENSORS_PER_SEGMENT else sensInt
+
+///
+/// Returns a Pair of SegName and local Sensor number for a global sensor number
+///
+function globalSensorNumberToPair(sensorNum: GlobalSensorNum): Pair<SegName, SensorNum> =
+  Pair(globalSensorNumberToSeg(sensorNum), globalSensorNumberToLocalSensorNumber(sensorNum))
+

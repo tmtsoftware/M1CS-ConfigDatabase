@@ -1,0 +1,113 @@
+amends "pkl:test"
+
+import "../utils.pkl"
+
+local r1 = List("A1", "A2", "A3", "B1", "B2", "B3")
+
+
+facts {
+  ["checkSegId"] {
+    utils.checkSegName("A22") == true
+    utils.checkSegName("G22") == false
+    utils.checkSegName("A01") == true
+    utils.checkSegName("A00") == false
+    utils.checkSegName("A82") == true
+    utils.checkSegName("A83") == false
+  }
+  ["checkSegs"] {
+    utils.segments(List("A", "B"), 3) == r1
+    utils.segments(utils.sectors, utils.SEGMENTS_PER_SECTOR).length == utils.TOTAL_NUMBER_SEGMENTS
+  }
+  ["sectorLetter"] {
+    utils.sectorLetter("A2") == "A"
+    utils.sectorLetter("F8") == "F"
+    utils.mirrorNumber("A2") == 2
+    utils.mirrorNumber("F8") == 8
+  }
+  ["sectorNumber"] {
+    utils.sectorNumber("A2") == 1
+    utils.sectorNumber("F2") == 6
+  }
+  ["mirrorNumber"] {
+    utils.mirrorNumber("A1") == 1
+    utils.mirrorNumber("B1") == 1
+    utils.mirrorNumber("F82") == 82
+  }
+  ["segmentNumber"] {
+    utils.segNum("A1") == 1
+    utils.segNum("B1") == 83
+    utils.segNum("C19") == 183
+    utils.segNum("B1") == utils.SEGMENTS_PER_SECTOR+1
+    utils.segNum("F82") == utils.TOTAL_NUMBER_SEGMENTS
+  }
+  ["segmentName"] {
+    utils.getNameFromNum(1) == "A1"
+    utils.getNameFromNum(183) == "C19"
+    utils.getNameFromNum(328) == "D82"
+    utils.getNameFromNum(329) == "E1"
+    utils.getNameFromNum(411) == "F1"
+    utils.getNameFromNum(492) == "F82"
+  }
+  ["globalActuatorNumber"] {
+    utils.globalActuatorNumber("A1", 1) == 1
+    utils.globalActuatorNumber("A2", 1) == 4
+    utils.globalActuatorNumber("A10", 2) == 29
+    utils.globalActuatorNumber("B21", 3) == 309
+    utils.globalActuatorNumber("C49", 2) == 638
+    utils.globalActuatorNumber("D82", 3) == 984
+    utils.globalActuatorNumber("F82", 1) == 1474
+    utils.globalActuatorNumber("F82", 2) == 1475
+    utils.globalActuatorNumber("F82", 3) == 1476
+  }
+  ["localActuatorNumber"] {
+    utils.localActuatorNumber(1) == 1
+    utils.localActuatorNumber(2) == 2
+    utils.localActuatorNumber(3) == 3
+    utils.localActuatorNumber(4) == 1
+    utils.localActuatorNumber(309) == 3
+    utils.localActuatorNumber(638) == 2
+    utils.localActuatorNumber(984) == 3
+    utils.localActuatorNumber(1474) == 1
+    utils.localActuatorNumber(1475) == 2
+    utils.localActuatorNumber(1476) == 3
+  }
+  ["globalSensorNumber"] {
+    utils.globalSensorNumber("A2", 1) == 13
+    utils.globalSensorNumber("A10", 12) == 120
+    utils.globalSensorNumber("B21", 8) == 1232
+    utils.globalSensorNumber("C49", 6) == 2550
+    utils.globalSensorNumber("D82", 3) == 3927
+    utils.globalSensorNumber("E82", 12) == 4920
+    utils.globalSensorNumber("F1", 1) == 4921
+    utils.globalSensorNumber("F82", 12) == 5904
+  }
+  ["globalSensorNumberToSeg"] {
+    utils.globalSensorNumberToSeg(13) == "A2"
+    utils.globalSensorNumberToSeg(120) == "A10"
+    utils.globalSensorNumberToSeg(1232) == "B21"
+    utils.globalSensorNumberToSeg(2550) == "C49"
+    utils.globalSensorNumberToSeg(3927) == "D82"
+    utils.globalSensorNumberToSeg(4920) == "E82"
+    utils.globalSensorNumberToSeg(4921) == "F1"
+  }
+  ["globalSensorNumberToLocalSensorNumber"] {
+    utils.globalSensorNumberToLocalSensorNumber(13) == 1
+    utils.globalSensorNumberToLocalSensorNumber(120) == 12
+    utils.globalSensorNumberToLocalSensorNumber(1232) == 8
+    utils.globalSensorNumberToLocalSensorNumber(2550) == 6
+    utils.globalSensorNumberToLocalSensorNumber(3927) == 3
+    utils.globalSensorNumberToLocalSensorNumber(4920) == 12
+    utils.globalSensorNumberToLocalSensorNumber(4921) == 1
+    utils.globalSensorNumberToLocalSensorNumber(5904) == 12
+  }
+  ["globalSensorNumberToPair"] {
+    utils.globalSensorNumberToPair(13) == Pair("A2", 1)
+    utils.globalSensorNumberToPair(120) == Pair("A10", 12)
+    utils.globalSensorNumberToPair(1232) == Pair("B21", 8)
+    utils.globalSensorNumberToPair(2550) == Pair("C49", 6)
+    utils.globalSensorNumberToPair(3927) == Pair("D82", 3)
+    utils.globalSensorNumberToPair(4920) == Pair("E82", 12)
+    utils.globalSensorNumberToPair(4921) == Pair("F1", 1)
+    utils.globalSensorNumberToPair(5904) == Pair("F82", 12)
+  }
+}

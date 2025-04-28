@@ -1,0 +1,63 @@
+module m1cs.ActuatorBase
+
+import "../utils.pkl"
+import "./EIdDictionaryBase.pkl"
+import "../EIdDictionary.pkl"
+import "PositionLoopConfig.pkl"
+import "TargetGeneratorConfig.pkl"
+import "MotorConfig.pkl"
+
+
+///
+/// This creates the structure for a single Actuator config using all the classes on config
+///
+class ActuatorEntry {
+  actuatorNum: Int
+  actuatorEid: EIdDictionaryBase.EId
+  positionLoopConfig: PositionLoopConfig = new {}
+  positionLimits:MotorConfig.Limits = new MotorConfig.Limits {}
+  targetGenConfig: TargetGeneratorConfig
+  offloadMotorConfig = new MotorConfig.OffloadMotorConfig {}
+  snubberMotorConfig = new MotorConfig.SnubberMotorConfig {}
+}
+
+///
+/// The [TableEntry] contains the fields for one segment location including the
+/// electronic ID of the cell from the EidDictionary and 3 ActuatorEntries
+class TableEntry {
+  segEId:EIdDictionaryBase.EId
+  act1: ActuatorEntry
+  act2: ActuatorEntry
+  act3: ActuatorEntry
+}
+
+///
+/// This function creates a single Actuator Entry
+///
+function createActuatorEntry(actNum: Int, actId: EIdDictionaryBase.EId): ActuatorEntry =
+  new {
+    actuatorNum = actNum
+    actuatorEid = actId
+  }
+
+///
+/// This function creates the content for a segment location with values for each of its 3 actuators
+/// The value for the segment location is a TableEntry
+///
+function createTableEntry(segName: utils.SegName): TableEntry =
+  new {
+    segEId = EIdDictionary.eIdDictionary[segName].mirrorCellEId
+    act1 = createActuatorEntry(1, EIdDictionary.eIdDictionary[segName].actuator1EId)
+    act2 = createActuatorEntry(2, EIdDictionary.eIdDictionary[segName].actuator2EId)
+    act3 = createActuatorEntry(3, EIdDictionary.eIdDictionary[segName].actuator3EId)
+  }
+
+typealias ActuatorConfig = Mapping<utils.SegName, TableEntry>
+
+/// This default table is overriden in Actuators.pkl
+hidden defaultActuatorConfig: ActuatorConfig = new {
+  for (e in utils.segmentList) {
+    [e] = createTableEntry(e)
+  }
+}
+

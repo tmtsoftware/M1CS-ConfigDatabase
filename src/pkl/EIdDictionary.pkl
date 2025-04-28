@@ -1,0 +1,26 @@
+module m1cs.EIdDictionary
+
+import "config/EIdDictionaryBase.pkl"
+
+/// Overrides Example
+/// Key in bracket followed by a section that can override one or more values
+///
+eIdDictionary: EIdDictionaryBase.EIdDictionary = (EIdDictionaryBase.defaultEIdDictionary) {
+  // Add overrides here
+  ["A1"] {
+    mirrorCellEId = "23"
+  }
+  ["B1"] {
+    actuator1EId = "2001"
+  }
+}
+
+/// When called with pkl eval -m output/ EIdDictionary.pkl, this will generate the EIDictionary.json file
+output {
+  files {
+    ["EIDictionary.json"] {
+      value = eIdDictionary
+      renderer = new JsonRenderer {}
+    }
+  }
+}

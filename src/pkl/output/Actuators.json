@@ -1,0 +1,1106 @@
+{
+  "A1": {
+    "segEId": "23",
+    "act1": {
+      "actuatorNum": 1,
+      "actuatorEid": "A1:EidAct1",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    },
+    "act2": {
+      "actuatorNum": 2,
+      "actuatorEid": "A1:EidAct2",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    },
+    "act3": {
+      "actuatorNum": 3,
+      "actuatorEid": "A1:EidAct3",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    }
+  },
+  "A2": {
+    "segEId": "A2:cellId",
+    "act1": {
+      "actuatorNum": 1,
+      "actuatorEid": "A2:EidAct1",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    },
+    "act2": {
+      "actuatorNum": 2,
+      "actuatorEid": "A2:EidAct2",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    },
+    "act3": {
+      "actuatorNum": 3,
+      "actuatorEid": "A2:EidAct3",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    }
+  },
+  "B1": {
+    "segEId": "B1:cellId",
+    "act1": {
+      "actuatorNum": 1,
+      "actuatorEid": "2001",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    },
+    "act2": {
+      "actuatorNum": 2,
+      "actuatorEid": "B1:EidAct2",
+      "positionLoopConfig": {
+        "gainFactor": -100.2,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.25,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          100.0,
+          200.0,
+          300.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -10.1
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": -20.2,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "CONT",
+        "contGain": 2.345,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 90.0,
+          "scaleFactor": 0.75,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 2.02,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    },
+    "act3": {
+      "actuatorNum": 3,
+      "actuatorEid": "B1:EidAct3",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    }
+  },
+  "B2": {
+    "segEId": "B2:cellId",
+    "act1": {
+      "actuatorNum": 1,
+      "actuatorEid": "B2:EidAct1",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 5.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    },
+    "act2": {
+      "actuatorNum": 2,
+      "actuatorEid": "B2:EidAct2",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    },
+    "act3": {
+      "actuatorNum": 3,
+      "actuatorEid": "B2:EidAct3",
+      "positionLoopConfig": {
+        "gainFactor": 1.0,
+        "slewCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0
+        },
+        "trkCtrl": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0,
+          "FD": 4.0,
+          "Kl": 5.0,
+          "FL": 6.0
+        },
+        "gainSchedule": {
+          "Kp": 1.0,
+          "Ki": 2.0,
+          "Kd": 3.0
+        },
+        "trkIRParams": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0,
+          17.0,
+          18.0,
+          19.0
+        ]
+      },
+      "positionLimits": {
+        "offset": 100.0,
+        "scaleFactor": 0.5,
+        "upperLimit": 25.0,
+        "lowerLimit": -25.0
+      },
+      "targetGenConfig": {
+        "type": "CONST",
+        "amplitude": 20.0,
+        "period": 2.0,
+        "offset": 0.5,
+        "lpFilterFreq": 124.3
+      },
+      "offloadMotorConfig": {
+        "mode": "OFF",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      },
+      "snubberMotorConfig": {
+        "mode": "CONT",
+        "contGain": 1.0,
+        "contThreshold": 2.0,
+        "discStart": 3.0,
+        "discStop": 4.0,
+        "operatingCurrent": 5.0,
+        "standbyCurrent": 6.0,
+        "limits": {
+          "offset": 100.0,
+          "scaleFactor": 0.5,
+          "upperLimit": 25.0,
+          "lowerLimit": -25.0
+        }
+      }
+    }
+  }
+}

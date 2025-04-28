@@ -1,0 +1,158 @@
+{
+  "A1": {
+    "segEId": "23",
+    "whs": [
+      {
+        "whId": 1,
+        "gaugeRep": 1.0,
+        "tempCoeff": 2.0,
+        "calTemp": 3.0,
+        "posGain": 4.0,
+        "negGain": 5.0,
+        "handedness": "CW",
+        "limits": {
+          "lowLimit": -10.0,
+          "highLimit": 10.0
+        },
+        "strain": {
+          "offset": 1.23,
+          "width": 4.56
+        }
+      },
+      {
+        "whId": 2,
+        "gaugeRep": 1.0,
+        "tempCoeff": 2.0,
+        "calTemp": 3.0,
+        "posGain": 4.0,
+        "negGain": 5.0,
+        "handedness": "CW",
+        "limits": {
+          "lowLimit": -10.0,
+          "highLimit": 10.0
+        },
+        "strain": {
+          "offset": 1.23,
+          "width": 4.56
+        }
+      }
+    ]
+  },
+  "A2": {
+    "segEId": "A2:cellId",
+    "whs": [
+      {
+        "whId": 1,
+        "gaugeRep": 1.0,
+        "tempCoeff": 2.0,
+        "calTemp": 3.0,
+        "posGain": 4.0,
+        "negGain": 5.0,
+        "handedness": "CW",
+        "limits": {
+          "lowLimit": -10.0,
+          "highLimit": 10.0
+        },
+        "strain": {
+          "offset": 1.23,
+          "width": 4.56
+        }
+      },
+      {
+        "whId": 2,
+        "gaugeRep": -22.0,
+        "tempCoeff": 2.0,
+        "calTemp": 3.0,
+        "posGain": 4.0,
+        "negGain": 5.0,
+        "handedness": "CW",
+        "limits": {
+          "lowLimit": -10.0,
+          "highLimit": 10.0
+        },
+        "strain": {
+          "offset": 123.4,
+          "width": 4.56
+        }
+      }
+    ]
+  },
+  "B1": {
+    "segEId": "B1:cellId",
+    "whs": [
+      {
+        "whId": 1,
+        "gaugeRep": 1.0,
+        "tempCoeff": 2.0,
+        "calTemp": 3.0,
+        "posGain": 4.0,
+        "negGain": 5.0,
+        "handedness": "CW",
+        "limits": {
+          "lowLimit": -10.0,
+          "highLimit": 10.0
+        },
+        "strain": {
+          "offset": 1.23,
+          "width": 4.56
+        }
+      },
+      {
+        "whId": 2,
+        "gaugeRep": 1.0,
+        "tempCoeff": 2.0,
+        "calTemp": 3.0,
+        "posGain": 4.0,
+        "negGain": 5.0,
+        "handedness": "CW",
+        "limits": {
+          "lowLimit": -10.0,
+          "highLimit": 10.0
+        },
+        "strain": {
+          "offset": 1.23,
+          "width": 4.56
+        }
+      }
+    ]
+  },
+  "B2": {
+    "segEId": "B2:cellId",
+    "whs": [
+      {
+        "whId": 1,
+        "gaugeRep": 1.0,
+        "tempCoeff": 2.0,
+        "calTemp": 3.0,
+        "posGain": 4.0,
+        "negGain": 5.0,
+        "handedness": "CW",
+        "limits": {
+          "lowLimit": -10.0,
+          "highLimit": 10.0
+        },
+        "strain": {
+          "offset": 1.23,
+          "width": 4.56
+        }
+      },
+      {
+        "whId": 2,
+        "gaugeRep": 1.0,
+        "tempCoeff": 2.0,
+        "calTemp": 3.0,
+        "posGain": 4.0,
+        "negGain": 5.0,
+        "handedness": "CW",
+        "limits": {
+          "lowLimit": -10.0,
+          "highLimit": 10.0
+        },
+        "strain": {
+          "offset": 1.23,
+          "width": 4.56
+        }
+      }
+    ]
+  }
+}
