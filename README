@@ -1,3 +1,41 @@
 This is a PKL project (https://pkl-lang.org) to create the config files for the M1CS
 
 This work supports the M1CS PDR in November 2025
+
+There are 3 generated configuration files:
+
+EidDictionary.pkl - Maps mirror locations like B2 to the electronic IDs for mirror cell and actuators.
+There is no Eid for the Segment because it is in the database since it changes regularly.
+
+WHParams.pkl creates the entries for the warping harness motors and strain gauges.
+
+Actuators.pkl creates the entries for the actuators indcluding all spreadsheet parameters.
+
+There is no sensor config files as far as I can tell.  Their data is all in the database side.
+
+In each case the configs are looked up using the mirror locations (“A2”), but for the
+config files the electronic IDs are inserted into the config files when they are created. Note that
+for now, the electronic IDs are simulated to ensure the config files are correct.
+
+The defaults are held in the lower level files in the config directory for each of the three files.
+
+Defaults for each config are set in the low-level files.  They are set to unreal values at this point.
+Overrides are done in the three files above.  There are examples in each of the files: Actuators,pkl,
+WHParams.pkl and EIdDictionary.pkl
+
+The files in JSON are generated in the output directory.  The command to generate a file is
+like this (it’s also shown in each file):
+
+pkl eval -m output/ Actuators.pkl
+
+for testing each file the following is useful:
+
+pkl eval -f json filename.pkl
+
+This work is configured to create configuration files for a few sectors and segments.  The size of the files
+is setup in utils.pkl where you can set the sectors and the number of mirrors in each sector. The number of
+warping harness motors is set in config/WHParamsBase.pkl.
+
+PKL is not super hard to pick up, but it does take a little time.
+
+The docs are here:  https://pkl-lang.org/main/current/index.html

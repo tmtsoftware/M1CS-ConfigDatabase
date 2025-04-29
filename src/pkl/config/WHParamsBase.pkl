@@ -6,12 +6,13 @@ import "../EIdDictionary.pkl"
 
 typealias Handed = "CCW" | "CW"
 
-hidden const lowWHId = 1
-hidden const highWHId = 2 //21
+/// Setting HIGH_LOCATION_ID should be set to 21 for full mirror
+hidden const LOW_LOCATION_ID = 1
+hidden const HIGH_LOCATION_ID = 2 //21
 
 ///
 /// Type for Warping harness IDs limited from 1 to 21
-typealias WHId = (Int((id) ->  id >= lowWHId && id <= highWHId))
+typealias WHLocation = (Int((id) ->  id >= LOW_LOCATION_ID && id <= HIGH_LOCATION_ID))
 
 ///
 /// Warping Harness Limits
@@ -33,7 +34,7 @@ class StrainGaugeParams {
 /// Warping Harness Params
 ///
 class WHParams {
-  whId:WHId = 1
+  location:WHLocation = 1
   gaugeRep: Float = 1.0
   tempCoeff: Float = 2.0
   calTemp: Float = 3.0
@@ -59,9 +60,9 @@ function createWhEntry(segName: utils.SegName): WHEntry =
   new {
     segEId = EIdDictionary.eIdDictionary[segName].mirrorCellEId
     whs = new {
-      for (i in IntSeq(1, highWHId)) {
+      for (i in IntSeq(LOW_LOCATION_ID, HIGH_LOCATION_ID)) {
         new WHParams {
-          whId = i
+          location = i
         }
       }
     }
