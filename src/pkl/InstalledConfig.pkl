@@ -1,0 +1,48 @@
+module m1cs.Installed
+
+import "utils.pkl"
+import "segments/InstalledBase.pkl"
+
+// This file provides various configurations for testing but is also the place where the default is overridden
+// to indicate installed segments. MirrorConfig uses this to build its configuration.
+
+
+// This set is no segments installed
+hidden noSegmentsInstalled:InstalledBase.InstalledList = InstalledBase.defaultEmpty
+
+// This set is all segments installed
+hidden allSegmentsInstalled:List = utils.allMirrorCellList
+
+
+// This set creates 2 segments installed in each sector
+smallSetofSegments:InstalledBase.InstalledList = new Dynamic {
+    for (e in utils.allSectors) {
+        for (n in IntSeq(1, 2)) {
+            utils.toCellName(e, n)
+        }
+    }
+}.toList()
+
+
+randomSetofSegments:InstalledBase.InstalledList = new Dynamic {
+    "A1"
+    "A2"
+    "B3"
+    "C10"
+}.toList()
+
+// This is the set of CellNames that is used to build the MirrorConfig.  Set it to what you want.
+installedSegments:InstalledBase.InstalledList = smallSetofSegments
+
+
+
+/// When called with pkl eval -m output/ MirrorConfig.pkl, this will generate the MirrorConfig.json file
+output {
+    files {
+        ["InstalledSegmentsConfig.json"] {
+            value = installedSegments
+            renderer = new JsonRenderer {}
+        }
+    }
+}
+

@@ -1,6 +1,17 @@
 
 // HERE IS WHERE THE LIST OF SECTORS IS SET TO DETERMINE THE LENGHT OF CONFIG FILES
-const allSectors:List<String> = List("A", "B", "C", "D", "E", "F")
+
+typealias SectorName = String(length == 1 &&
+    (this == SecA || this == SecB || this == SecC || this == SecD || this == SecE || this == SecF))
+
+hidden const SecA = "A"
+hidden const SecB = "B"
+hidden const SecC = "C"
+hidden const SecD = "D"
+hidden const SecE = "E"
+hidden const SecF = "F"
+
+const allSectors:List<SectorName> = List(SecA, SecB, SecC, SecD, SecE, SecF)
 // This set is used for smaller tests
 hidden const testSectors:List<String> = List("A", "B")
 
@@ -20,7 +31,7 @@ const NUMBER_SPARE_SEGMENTS = FULL_SEGMENTS_PER_SECTOR
 hidden const TEST_SEGMENTS_PER_SECTOR = 2
 
 
-// 492 and
+// SegNum goes from 1 to 492 + 50.  A SegName is "s234"
 const TOTAL_NUMBER_SEGMENTS_ON_TELESCOPE = allSectors.length * SEGMENTS_PER_SECTOR
 const TOTAL_NUMBER_SEGMENTS = TOTAL_NUMBER_SEGMENTS_ON_TELESCOPE + NUMBER_SPARE_SEGMENTS
 
@@ -67,6 +78,10 @@ const CELL_NAME_LENGTH:Int = 3
 typealias CellName = String((str) -> checkCellName(str))
 const function checkCellName(id: String): Boolean = (id.length <= CELL_NAME_LENGTH && checkSector(id) && checkSectorMirror(id))
 
+typealias CellNumber = Int(isBetween(1, TOTAL_NUMBER_SEGMENTS))
+typealias SectorCellNumber = Int(isBetween(1, SEGMENTS_PER_SECTOR))
+
+
 class asCellName {
   // input parameter
   name: CellName
@@ -74,7 +89,7 @@ class asCellName {
   /// Output parameters
   ///
   /// Returns the letter of a segmentId ("A23")
-  sectorLetter: String = name.take(1)
+  sectorLetter: SectorName = name.take(1)
 
   ///
   /// The number of a sector as an Int
@@ -84,31 +99,32 @@ class asCellName {
 
   ///
   /// The number portion of a CellName (i.e. 42 in A42)
-  mirrorNumber: Int = name.drop(1).toInt()
+  mirrorNumber: SectorCellNumber = name.drop(1).toInt()
 
   ///
   /// Absolute segment number (1-492) for a cellname
-  segNum: Int = (sectorNumber - 1) * SEGMENTS_PER_SECTOR + mirrorNumber
+  segNum: CellNumber = (sectorNumber - 1) * SEGMENTS_PER_SECTOR + mirrorNumber
 
 }
 
 // Returns an object that has useful values based on the CellName (function as object pattern!)
-function cellName(x: CellName):asCellName = new { name = x}
+function cellName(c: CellName):asCellName = new { name = c}
+
+function toCellName(sector: SectorName, mirrorNumber: SectorCellNumber): CellName = sector.toUpperCase() + mirrorNumber.toString()
 
 ///
 /// Returns a list of cell names for sectors and maxMirrors in each sector
-const function createCellNames(sectors: List<String>, maxCells: Int) = new Dynamic {
+function createCellNames(sectors: List<String>, maxCells: Int):List<CellName> = new Dynamic {
   for (s in sectors) {
     for (m in IntSeq(1, maxCells)) {
-      s + m.toString()
+      //s + m.toString()
+      toCellName(s, m)
     }
   }
 }.toList()
 
 // List of all cellnames based on allSectors and SEGMENTS_PER_SECTOR
-hidden const allMirrorCellList:List<String> = createCellNames(allSectors, SEGMENTS_PER_SECTOR)
-
-
+hidden fixed allMirrorCellList:List<CellName> = createCellNames(allSectors, SEGMENTS_PER_SECTOR)
 ///
 /// Returns the Cell Name for a cell number
 ///

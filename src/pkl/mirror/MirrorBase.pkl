@@ -3,6 +3,7 @@ module m1cs.mirror.MirrorBase
 import "../utils.pkl"
 import "../actuators/ActuatorDictionary.pkl"
 import "../ActuatorConfig.pkl"
+import "../InstalledConfig.pkl"
 import "MirrorCellEIds.pkl"
 
 ///
@@ -32,12 +33,13 @@ typealias MirrorConfig = Mapping<utils.CellName, TableEntry>
 /// This default table is overriden in Actuators.pkl
 ///
 function createTable(cellNames: List<utils.CellName>):MirrorConfig = new {
-  for (e in cellNames) {
-    [e] = createTableEntry(e,
-      utils.toActName(utils.globalActuatorNumber(e, 1)),
-      utils.toActName(utils.globalActuatorNumber(e, 2)),
-      utils.toActName(utils.globalActuatorNumber(e, 3))
-    )
+    //for (e in cellNames) {
+    for (e in InstalledConfig.installedSegments) {
+      [e] = createTableEntry(e,
+        utils.toActName(utils.globalActuatorNumber(e, 1)),
+        utils.toActName(utils.globalActuatorNumber(e, 2)),
+        utils.toActName(utils.globalActuatorNumber(e, 3))
+      )
   }
 }
 

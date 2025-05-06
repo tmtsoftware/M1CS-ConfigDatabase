@@ -4,7 +4,7 @@ This is a PKL project (https://pkl-lang.org) to create the config files for the 
 
 This work supports the M1CS PDR in November 2025
 
-There are 6 generated configuration files and associated files needed for the configuration files.
+There are 7 generated configuration files and associated files needed for the configuration files.
 
 SegmentEIds.pkl - Creates the SegmentEIds.json file that maps what I call segment names (e.g. "s324") to segment
 electronic IDs.  This includes the 492 segments and the 82 spares. The segmentEids are faked and this file will be
@@ -26,9 +26,14 @@ WHItemsConfig.pkl creates the entries for the warping harness motors and strain 
 file is a mapping between segment names and the various warping harness parameters from the spreadsheet.  Also included
 is the segmentEId for each segment since the warping harness items are tied to the segment.
 
+InstalledConfig.pkl is the list of CellNames (i.e. A22) that are installed in the mirror.  This list is used to
+construct MirrorConfig.json. The value InstalledConfig.installedSegments should be set to one of the predefined
+sets of CellNames or create your own.  The constructed file is created with "smallSetofSegments", which has 1 and 2
+in each sector. A file called InstalledSegmentsConfig.json is created in output with makeAll.
 
-MirrorConfig.pkl creates the MirrorConfig.json file. This file combines the mirror cell lcoations with the installed
+MirrorConfig.pkl creates the MirrorConfig.json file. This file combines the mirror cell locations with the installed
 actuators. When created, a reference such as "a234" is used to extract the actuator parameters from ActuatorConfig.
+The MirrorConfig creates entries for every installed segment.
 
 There is no sensor config files as far as I can tell.  Their data is all in the database side.
 

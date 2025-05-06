@@ -1,0 +1,11 @@
+module m1cs.segments.InstalledBase
+
+import "../utils.pkl"
+
+typealias InstalledList = List<utils.CellName>
+
+// This is a configuration file to indicate what mirror cells (e.g. A22) are installed
+// The default is that none are installed, so the list is empty. Overrides to indicate installed
+// segments by including the CellName in the list
+
+defaultEmpty:InstalledList = List()

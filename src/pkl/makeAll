@@ -16,5 +16,8 @@ pkl eval -m output/ ActuatorConfig.pkl
 echo "Writing WHItemsConfig.json"
 pkl eval -m output/ WHItemsConfig.pkl
 
+echo "Writing InstalledSegmentConfig.json"
+pkl eval -m output/ InstalledConfig.pkl
+
 echo "Writing MirrorConfig.json"
 pkl eval -m output/ MirrorConfig.pkl
