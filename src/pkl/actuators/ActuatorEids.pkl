@@ -1,0 +1,20 @@
+module m1cs.actuators.ActuatorEids
+
+import "../utils.pkl"
+
+hidden const FAKE_ACTUATOR_EID_ENDING = ":ActEId"
+
+hidden actuatorEIds = new {
+  for (e in IntSeq(1, utils.MAX_GLOBAL_ACTUATOR_NUMBER)) {
+    [utils.ACTUATOR_NAME_BASE+e.toString()] = e.toString() + FAKE_ACTUATOR_EID_ENDING
+  }
+}
+/// When called with pkl eval -m output/ ActuatorsEIds.pkl, this will generate the ActuatorEIds.json file
+output {
+  files {
+    ["ActuatorEIds.json"] {
+      value = actuatorEIds
+      renderer = new JsonRenderer {}
+    }
+  }
+}

@@ -1,0 +1,98 @@
+module m1cs.wh.WHItemsDictionary
+
+// This file maps warping harness items to the segments that hold them through the SegmentID
+
+import "../utils.pkl"
+import "../segments/SegmentEIds.pkl"
+
+const WH_ITEMS_PER_SEGMENT:Int = 21
+const WH_ITEMS_ON_TELESCOPE:Int = utils.TOTAL_NUMBER_SEGMENTS_ON_TELESCOPE * WH_ITEMS_PER_SEGMENT
+const TOTAL_NUMBER_WH_ITEMS:Int = WH_ITEMS_ON_TELESCOPE + utils.NUMBER_SPARE_SEGMENTS * WH_ITEMS_PER_SEGMENT
+
+typealias Handed = "CCW" | "CW"
+
+
+/// Setting HIGH_LOCATION_ID should be set to 21 for full mirror
+hidden const LOW_LOCATION_ID = 1
+hidden const HIGH_LOCATION_ID = 21
+
+typealias EId = String
+
+///
+/// Type for Warping harness IDs limited from 1 to 21
+typealias WHLocation = (Int((id) ->  id >= LOW_LOCATION_ID && id <= HIGH_LOCATION_ID))
+
+///
+/// Warping Harness Limits
+///
+class WHLimits {
+  lowLimit: Float = -10.0
+  highLimit: Float = 10.0
+}
+
+///
+/// Strain Gauge Config
+///
+class StrainGaugeParams {
+  offset: Float = 1.23
+  width: Float = 4.56
+}
+
+class WHItemEntry {
+  segmentEId:EId
+  whItems: Mapping<String,WHParams>
+}
+
+///
+/// Warping Harness Params
+///
+class WHParams {
+  location: WHLocation
+  gaugeRep: Float = 1.0
+  tempCoeff: Float = 2.0
+  calTemp: Float = 3.0
+  posGain: Float = 4.0
+  negGain: Float = 5.0
+  handedness: Handed = "CW"
+  limits: WHLimits
+  strain: StrainGaugeParams
+}
+
+///
+/// This function creates a single WHEntry
+///
+function createWhEntry(segName: utils.SegName): WHItemEntry =
+  new {
+    segmentEId = SegmentEIds.segmentEIds[segName]
+    whItems = new {
+      for (i in IntSeq(LOW_LOCATION_ID, HIGH_LOCATION_ID)) {
+        [i.toString()] = new WHParams {
+          location = i
+        }
+      }
+    }
+  }
+
+typealias WHItemsConfig = Mapping<utils.SegName, WHItemEntry>
+
+
+hidden defaulWHItemsConfig: WHItemsConfig = new {
+  for (e in utils.allSegmentsNameList()) {
+      [e] = createWhEntry(e)
+    }
+  }
+
+
+
+///
+/// This function will return the config entry for a sepecific Segment EID
+///
+function getWHSegmentConfigWithEid(segEId: SegmentEIds.SegmentEId):Pair<utils.SegName, WHItemEntry> =
+  let( x = defaulWHItemsConfig.toMap().filter((sn, item) -> (item.segmentEId == segEId)).entries.first)
+    Pair(x.key, x.second)
+
+///
+/// This function will return a specific item mapped to a segmentEId
+///
+function getWHItemConfigWithLocation(segEId: SegmentEIds.SegmentEId, _location: WHLocation): Pair<String, WHParams> =
+  getWHSegmentConfigWithEid(segEId).second.whItems.toMap().filter((n, item) -> (item.location == _location)).entries.first

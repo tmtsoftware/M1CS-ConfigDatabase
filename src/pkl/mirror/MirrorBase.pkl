@@ -1,0 +1,50 @@
+module m1cs.mirror.MirrorBase
+
+import "../utils.pkl"
+import "../actuators/ActuatorDictionary.pkl"
+import "../ActuatorConfig.pkl"
+import "MirrorCellEIds.pkl"
+
+///
+/// The [TableEntry] contains the fields for one segment location including the
+/// electronic ID of the cell from the EidDictionary and 3 ActuatorEntries
+class TableEntry {
+  cellEId:utils.EId
+  act1: ActuatorDictionary.ActuatorEntry
+  act2: ActuatorDictionary.ActuatorEntry
+  act3: ActuatorDictionary.ActuatorEntry
+}
+
+///
+/// This function creates the content for a segment location with values for each of its 3 actuators
+/// The value for the segment location is a TableEntry
+///
+function createTableEntry(segName: utils.CellName, _act1: utils.ActName, _act2: utils.ActName, _act3: utils.ActName): TableEntry =
+  new {
+    cellEId = MirrorCellEIds.mirrorCellEIds[segName]
+    act1 = ActuatorConfig.actuatorConfig[_act1]
+    act2 = ActuatorConfig.actuatorConfig[_act2]
+    act3 = ActuatorConfig.actuatorConfig[_act3]
+  }
+
+typealias MirrorConfig = Mapping<utils.CellName, TableEntry>
+
+/// This default table is overriden in Actuators.pkl
+///
+function createTable(cellNames: List<utils.CellName>):MirrorConfig = new {
+  for (e in cellNames) {
+    [e] = createTableEntry(e,
+      utils.toActName(utils.globalActuatorNumber(e, 1)),
+      utils.toActName(utils.globalActuatorNumber(e, 2)),
+      utils.toActName(utils.globalActuatorNumber(e, 3))
+    )
+  }
+}
+
+///
+/// This function is provided to make setting a specific actuator on the mirror
+function setActuatorEntry(actName: utils.ActName) = ActuatorConfig.actuatorConfig[actName]
+//x = utils.createCellNames(List("A", "B"), 2)
+
+defaultMirrorConfig:MirrorConfig = createTable(utils.createCellNames(List("A", "B"), 2))
+

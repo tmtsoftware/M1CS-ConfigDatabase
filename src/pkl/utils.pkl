@@ -1,92 +1,153 @@
 
-/// HERE IS WHERE THE LIST OF SECTORS IS SET TO DETERMINE THE LENGHT OF CONFIG FILES
-const sectors:List<String> = List("A", "B") //"C", "D", "E", "F")
+// HERE IS WHERE THE LIST OF SECTORS IS SET TO DETERMINE THE LENGHT OF CONFIG FILES
+const allSectors:List<String> = List("A", "B", "C", "D", "E", "F")
+// This set is used for smaller tests
+hidden const testSectors:List<String> = List("A", "B")
 
-/// HERE IS WHERE THE NUMBER OF SEGEMNTS IN A SECTOR IS SET
-const SEGMENTS_PER_SECTOR:Int = 2 // 82
-const TOTAL_NUMBER_SEGMENTS = sectors.length * SEGMENTS_PER_SECTOR
+/// ----------------   Electronic ID -------------------------
+typealias EId = String
 
-const SEGMENT_NAME_LENGTH:Int = 3
-///
-/// Returns the letter of a segmentId ("A23")
-///
-function sectorLetter(id: SegName): String =
-  if (id.length <= 3)
-    id.take(1)
-  else
-    throw("Segment ID must be <= \(SEGMENT_NAME_LENGTH)")
+/// ----------------------------- Segments ----------------------------
+
+// HERE IS WHERE THE NUMBER OF SEGMENTS IN A SECTOR IS SET
+const FULL_SEGMENTS_PER_SECTOR = 82
+
+const SEGMENTS_PER_SECTOR:Int = FULL_SEGMENTS_PER_SECTOR
+// Number of spares is also 82
+const NUMBER_SPARE_SEGMENTS = FULL_SEGMENTS_PER_SECTOR
+
+/// For testing
+hidden const TEST_SEGMENTS_PER_SECTOR = 2
+
+
+// 492 and
+const TOTAL_NUMBER_SEGMENTS_ON_TELESCOPE = allSectors.length * SEGMENTS_PER_SECTOR
+const TOTAL_NUMBER_SEGMENTS = TOTAL_NUMBER_SEGMENTS_ON_TELESCOPE + NUMBER_SPARE_SEGMENTS
+
+const MAX_SEGMENT_NUMBER = TOTAL_NUMBER_SEGMENTS
+
+typealias SegmentNum = Int((n) -> n >= 1 && n <= TOTAL_NUMBER_SEGMENTS)
+
+function toSegNum(segName: SegName): SegNum = segName.drop(SEGMENT_NAME_BASE.length).toInt()
+
+function toSegName(segNum: SegNum): SegName = SEGMENT_NAME_BASE + segNum.toString()
+
+hidden const SEGMENT_NAME_BASE:String = "s"
+const SEGMENT_NAME_LENGTH:Int = 5  // Up to s574
+
+hidden const FAKE_SEGMENT_EID_ENDING = ":SegmentEId"
+
+
+// An ActName is letter A and a number like a1234
+typealias SegName = String((str) -> str.take(1) == SEGMENT_NAME_BASE && str.length <= SEGMENT_NAME_LENGTH)
+
+typealias SegNum = Int((n) -> n >= 1 && n <= MAX_SEGMENT_NUMBER)
+
+
+// List of all cellnames based on allSectors and SEGMENTS_PER_SECTOR
+function allSegmentsNameList():List<SegName> = new Dynamic {
+  for (m in IntSeq(1, TOTAL_NUMBER_SEGMENTS)) {
+    toSegName(m)
+  }
+}.toList()
 
 ///
-/// Returns the number of the sector (1-6)
+/// -------------------------- Mirror Structure Cells -----------------------
 ///
-function sectorNumber(id: SegName): Int =
-  let (sLetter = sectorLetter(id))
-    sectors.indexOf(sLetter) + 1
 
-const segmentList:List<String> = segments(sectors, SEGMENTS_PER_SECTOR)
+// Checks that a mirror cell name has a valid sector (A-F)
+const function checkSector(id: String): Boolean = allSectors.contains(id.take(1))
 
-///
-/// Checks that a segName had a valid sector (A-F)
-///
-const function checkSegNameSector(id: String): Boolean = sectors.contains(id.take(1))
-
-/// Verify that a segment ID mirror number is within range (1-82)
-///
+/// Verify that a cell name mirror number is within range (1-82)
 const function checkSectorMirror(id: String): Boolean =
   id.drop(1).toInt() <= SEGMENTS_PER_SECTOR && id.drop(1).toInt() >= 1
 
-const function checkSegName(id: String): Boolean = checkSegNameSector(id) && checkSectorMirror(id)
+const CELL_NAME_LENGTH:Int = 3
+// A CellName is a sector and a number like A42
+typealias CellName = String((str) -> checkCellName(str))
+const function checkCellName(id: String): Boolean = (id.length <= CELL_NAME_LENGTH && checkSector(id) && checkSectorMirror(id))
 
-typealias SegName = String((str) -> checkSegName(str))
+class asCellName {
+  // input parameter
+  name: CellName
+
+  /// Output parameters
+  ///
+  /// Returns the letter of a segmentId ("A23")
+  sectorLetter: String = name.take(1)
+
+  ///
+  /// The number of a sector as an Int
+  ///
+  sectorNumber: Int =
+    allSectors.indexOf(sectorLetter) + 1
+
+  ///
+  /// The number portion of a CellName (i.e. 42 in A42)
+  mirrorNumber: Int = name.drop(1).toInt()
+
+  ///
+  /// Absolute segment number (1-492) for a cellname
+  segNum: Int = (sectorNumber - 1) * SEGMENTS_PER_SECTOR + mirrorNumber
+
+}
+
+// Returns an object that has useful values based on the CellName (function as object pattern!)
+function cellName(x: CellName):asCellName = new { name = x}
 
 ///
-/// Returns a list of SegName for sectors and maxMirrors in each sector
-const function segments(sectors: List<String>, maxMirrors: Int) = new Dynamic {
+/// Returns a list of cell names for sectors and maxMirrors in each sector
+const function createCellNames(sectors: List<String>, maxCells: Int) = new Dynamic {
   for (s in sectors) {
-    for (m in IntSeq(1, maxMirrors)) {
+    for (m in IntSeq(1, maxCells)) {
       s + m.toString()
     }
   }
 }.toList()
 
-///
-/// Returns the number of the mirror in a SegName (1-82)
-///
-function mirrorNumber(id: SegName): Int =
-  if (id.length <= SEGMENT_NAME_LENGTH)
-    id.drop(1).toInt()
-  else
-    throw("Segment ID must be a sector + number less than or equal 82")
+// List of all cellnames based on allSectors and SEGMENTS_PER_SECTOR
+hidden const allMirrorCellList:List<String> = createCellNames(allSectors, SEGMENTS_PER_SECTOR)
 
 
 ///
-/// Returns the global segment number (1-492) for a segName
+/// Returns the Cell Name for a cell number
 ///
-function segNum(id: SegName): Int =
-  if (checkSegName(id))
-    let (sNumber = sectorNumber(id))
-      (sNumber - 1) * SEGMENTS_PER_SECTOR + mirrorNumber(id)
-  else
-    throw("Segment ID must be a sector + number less than or equal 82")
+function getCellNameFromNum(cellNum: Int): CellName =
+  let (sector:Int = (cellNum - 1) ~/ SEGMENTS_PER_SECTOR)
+    let(num:Int = cellNum % SEGMENTS_PER_SECTOR)
+      allSectors[sector] + (if (num == 0) SEGMENTS_PER_SECTOR else num).toString()
 
-//
-// Returns the SegName for a segment number
-//
-function getNameFromNum(segNum: Int): String =
-  let (sector:Int = (segNum - 1) ~/ SEGMENTS_PER_SECTOR)
-    let(num:Int = segNum % SEGMENTS_PER_SECTOR)
-      sectors[sector] + (if (num == 0) SEGMENTS_PER_SECTOR else num).toString()
 
+///
+/// -------------  Actuators ---------------------------------
+///
 const ACTUATORS_PER_SEGMENT:Int = 3
-const MAX_GLOBAL_ACTUATOR_NUMBER = ACTUATORS_PER_SEGMENT * TOTAL_NUMBER_SEGMENTS
+const ACTUATORS_ON_TELESCOPE: Int = TOTAL_NUMBER_SEGMENTS_ON_TELESCOPE * ACTUATORS_PER_SEGMENT
+const NUMBER_SPARE_ACTUATORS = 50
+const TOTAL_NUMBER_ACTUATORS = ACTUATORS_ON_TELESCOPE + NUMBER_SPARE_ACTUATORS
+const MAX_GLOBAL_ACTUATOR_NUMBER = TOTAL_NUMBER_ACTUATORS
 
-typealias ActNum = Int((id) -> id >= 1 && id <= ACTUATORS_PER_SEGMENT)
+typealias ActNum = Int((n) -> n >= 1 && n <= MAX_GLOBAL_ACTUATOR_NUMBER)
+
+function toActNum(actName: ActName): ActNum = actName.drop(1).toInt()
+
+function toActName(actNum: ActNum): ActName = ACTUATOR_NAME_BASE + actNum.toString()
+
+hidden const ACTUATOR_NAME_BASE:String = "a"
+const ACTUATOR_NAME_LENGTH:Int = 5  // Up to a1626
+
+// An ActName is letter A and a number like a1234
+typealias ActName = String((str) -> str.take(1) == ACTUATOR_NAME_BASE && str.length <= ACTUATOR_NAME_LENGTH)
+
+typealias LocalActNum = Int((n) -> n >= 1 && n <= ACTUATORS_PER_SEGMENT)
+
+
 
 ///
 /// Returns a global actuator number for a SegName and a local actuator number (1-3) ActNum
-function globalActuatorNumber(id: SegName, actNum: ActNum): Int =
-  let (globalSegNum = segNum(id))
-    (globalSegNum - 1) * ACTUATORS_PER_SEGMENT + actNum
+function globalActuatorNumber(name: CellName, localActNum: LocalActNum): ActNum =
+  let (globalSegNum = cellName(name).segNum)
+    (globalSegNum - 1) * ACTUATORS_PER_SEGMENT + localActNum
 
 ///
 /// Returns a local actuator number for a global actuator number
@@ -95,7 +156,10 @@ function localActuatorNumber(globalActuatorNumber): ActNum =
   let (mod = globalActuatorNumber % ACTUATORS_PER_SEGMENT)
     if (mod == 0) ACTUATORS_PER_SEGMENT else mod
 
-/// Sensors
+
+///
+/// ------------------------ Sensors ------------------------------------
+///
 const SENSORS_PER_SEGMENT:Int = 12
 const SENSORS_PER_SECTOR:Int = SENSORS_PER_SEGMENT * SEGMENTS_PER_SECTOR
 const MAX_GLOBAL_SENSOR_NUMBER = SENSORS_PER_SEGMENT * TOTAL_NUMBER_SEGMENTS
@@ -105,17 +169,17 @@ typealias GlobalSensorNum = Int((id) -> id >= 1 && id <= MAX_GLOBAL_SENSOR_NUMBE
 
 ///
 /// Returns the GlobalSensorNumber (1-5904) given a segName and local Sensor Number
-function globalSensorNumber(id: SegName, sensorNum: SensorNum): GlobalSensorNum =
-  let (globalSegNum = segNum(id))
+function globalSensorNumber(id: CellName, sensorNum: SensorNum): GlobalSensorNum =
+  let (globalSegNum = cellName(id).segNum)
     (globalSegNum - 1) * SENSORS_PER_SEGMENT + sensorNum
 
 
 ///
 /// Returns the segName for an absolute sensor number
 ///
-function globalSensorNumberToSeg(sensorNum: Int): SegName =
+function globalSensorNumberToSeg(sensorNum: Int): CellName =
   let(segInt = (sensorNum - 1) ~/ SENSORS_PER_SEGMENT)
-      getNameFromNum(segInt + 1)
+      getCellNameFromNum(segInt + 1)
 
 ///
 /// Returns a local sensor number from a global sensor number
@@ -127,6 +191,7 @@ function globalSensorNumberToLocalSensorNumber(sensorNum: GlobalSensorNum): Sens
 ///
 /// Returns a Pair of SegName and local Sensor number for a global sensor number
 ///
-function globalSensorNumberToPair(sensorNum: GlobalSensorNum): Pair<SegName, SensorNum> =
+function globalSensorNumberToPair(sensorNum: GlobalSensorNum): Pair<CellName, SensorNum> =
   Pair(globalSensorNumberToSeg(sensorNum), globalSensorNumberToLocalSensorNumber(sensorNum))
+
 

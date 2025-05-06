@@ -1,0 +1,22 @@
+module m1cs.MirrorConfig
+
+import "mirror/MirrorBase.pkl"
+
+mirrorConfig = (MirrorBase.defaultMirrorConfig) {
+  ["B1"] {
+      act1 = MirrorBase.setActuatorEntry("a400")
+      act2 = MirrorBase.setActuatorEntry("a1000")
+  }
+}
+
+
+/// When called with pkl eval -m output/ MirrorConfig.pkl, this will generate the MirrorConfig.json file
+output {
+  files {
+    ["MirrorConfig.json"] {
+      value = mirrorConfig
+      renderer = new JsonRenderer {}
+    }
+  }
+}
+

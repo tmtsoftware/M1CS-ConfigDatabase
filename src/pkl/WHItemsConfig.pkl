@@ -1,0 +1,30 @@
+module m1cs.WHItemsConfig
+
+import "wh/WHItemsDictionary.pkl"
+
+/// Overrides - this ammends the defaultWarpingHarnessConfig
+/// First: Reference the segment
+/// Then reference the Listing of 21 harnesses and modify the desired entries
+///
+whItemsConfig: WHItemsDictionary.WHItemsConfig = (WHItemsDictionary.defaulWHItemsConfig) {
+  ["s1"] {
+    whItems {
+      ["1"] {
+        gaugeRep = -22.0
+        strain {
+          offset = 123.4
+        }
+      }
+    }
+  }
+}
+
+/// When called with pkl eval -m output/ WHParams.pkl, this will generate the WHParams.json file
+output {
+  files {
+    ["WHItemsConfig.json"] {
+      value = whItemsConfig
+      renderer = new JsonRenderer {}
+    }
+  }
+}

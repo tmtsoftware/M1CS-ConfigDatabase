@@ -1,0 +1,26 @@
+amends "pkl:test"
+
+import "../utils.pkl"
+import "../actuators/ActuatorEids.pkl"
+import "../ActuatorConfig.pkl"
+
+facts {
+  ["toActNum"] {
+    utils.toActNum("a1") == 1
+    utils.toActNum("a234") == 234
+    utils.toActNum("a1000") == 1000
+  }
+  ["toActName"] {
+    utils.toActName(1) == "a1"
+    utils.toActName(234) == "a234"
+    utils.toActName(1000) == "a1000"
+  }
+  ["EidLookup"] {
+    ActuatorEids.actuatorEIds["a1"] == "1\(ActuatorEids.FAKE_ACTUATOR_EID_ENDING)"
+  }
+  ["getActuatorConfigWithEId"] {
+    ActuatorConfig.getActuatorConfigWithEId("3:ActEId").first == "a3"
+    ActuatorConfig.getActuatorConfigWithEId("3:ActEId").second.actuatorEId == "3:ActEId"
+  }
+}
+

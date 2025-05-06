@@ -1,0 +1,36 @@
+module m1cs.ActuatorDictionary
+
+import "../utils.pkl"
+import "ActuatorEids.pkl"
+import "PositionLoopConfig.pkl"
+import "OffloadMotorConfig.pkl"
+import "SnubberMotorConfig.pkl"
+import "TargetGeneratorConfig.pkl"
+
+typealias EId = String
+
+hidden const DEFUALT_EId = "1"
+
+class ActuatorEntry {
+  actuatorName: utils.ActName
+  actuatorEId: EId
+  positionLoopConfig: PositionLoopConfig
+  targetGenConfig: TargetGeneratorConfig
+  offloadMotorConfig: OffloadMotorConfig
+  snubberMotorConfig = SnubberMotorConfig
+}
+
+function createActuatorEntry(actNum: utils.ActNum):ActuatorEntry = new {
+  actuatorName = utils.toActName(actNum)
+  actuatorEId = ActuatorEids.actuatorEIds[actuatorName]
+}
+
+typealias ActuatorDictionary = Mapping<utils.ActName,ActuatorEntry>
+
+hidden defaultActuatorDictionary:ActuatorDictionary = new {
+  for (e in IntSeq(1, utils.MAX_GLOBAL_ACTUATOR_NUMBER)) {
+    [utils.ACTUATOR_NAME_BASE+e.toString()] = createActuatorEntry(e)
+  }
+}
+
+//x = defaultActuatorDictionary

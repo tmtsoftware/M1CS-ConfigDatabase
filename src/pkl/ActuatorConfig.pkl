@@ -1,0 +1,79 @@
+///
+/// This module provides the Actuator Dictionary that has entries for all the actuators including the 50 spares.
+/// This is the place to override default values as well.
+module m1cs.ActuatorConfig
+
+import "utils.pkl"
+import "actuators/ActuatorDictionary.pkl"
+
+
+///
+/// This function will return the config entry for a sepecific segment EID from the overridden ActuatorDictionary.
+/// The return value is a Pair with the first member the ActName (i.e. a200), the second is the speciic actuator config.
+///
+function getActuatorConfigWithEId(actEId: ActuatorDictionary.EId):Pair<utils.ActName, ActuatorDictionary.ActuatorEntry> =
+  let( x = actuatorConfig.toMap().filter((_, item) -> (item.actuatorEId == actEId)).entries.first)
+    Pair(x.key, x.second)
+
+
+
+//  This file allows overriding the default actuator configuration.
+
+///
+/// Overrides are demonstrated here.  The most difficult one is trakIRParams which must be entered like
+/// an array. Key in bracket is the actuator name.
+///
+actuatorConfig = (ActuatorDictionary.defaultActuatorDictionary) {
+  ["a1"] {
+    positionLoopConfig {
+      gainFactor = -100.2
+      trkCtrl {
+        Kp = 1.25
+      }
+      trkIRParams {
+        [0] = 100.0
+        [1] = 200.0
+        [2] = 300.0
+      }
+      limits {
+        offset = 1.0
+        scaleFactor = 1.252
+        upperLimit = 123.4
+        lowerLimit = 34.2
+      }
+    }
+    targetGenConfig {
+      amplitude = -20.2
+    }
+    offloadMotorConfig = new {
+      mode = "CONT"
+      contGain = 2.345
+      limits = new {
+        offset = 90.0
+        scaleFactor = .75
+      }
+    }
+    snubberMotorConfig = new {
+      discStart = 2.02
+    }
+  }
+  ["a100"] {
+    snubberMotorConfig = new {
+      discStop = 5.0
+    }
+  }
+}
+
+
+
+/// When called with pkl eval -m output/ ActuatorConfig.pkl, this will generate the ActuatorConfig.json file
+output {
+  files {
+    ["ActuatorConfig.json"] {
+      value = actuatorConfig
+      renderer = new JsonRenderer {}
+    }
+  }
+}
+
+

@@ -1,0 +1,23 @@
+module m1cs.mirror.MirrorCellEIds
+
+// This file maps cellNames to EIds
+
+import "../utils.pkl"
+
+hidden const FAKE_CELL_EID_ENDING = ":CellEId"
+
+ mirrorCellEIds = new {
+  for (e in utils.allMirrorCellList) {
+    [e] = e.toString() + FAKE_CELL_EID_ENDING
+  }
+}
+
+/// When called with pkl eval -m output/ ActuatorsEIds.pkl, this will generate the ActuatorEIds.json file
+output {
+  files {
+    ["MirrorCellEIds.json"] {
+      value = mirrorCellEIds
+      renderer = new JsonRenderer {}
+    }
+  }
+}

@@ -1,0 +1,23 @@
+module m1cs.segments.SegmentEIds
+
+import "../utils.pkl"
+
+typealias SegmentEId = String
+
+// This file maps the segment names (i.e. s499) to the segmentEIds
+
+segmentEIds:Mapping<utils.SegName,SegmentEId> = new {
+  for (e in utils.allSegmentsNameList()) {
+    [e] = utils.toSegNum(e).toString() + utils.FAKE_SEGMENT_EID_ENDING
+  }
+}
+
+/// When called with pkl eval -m output/ ActuatorsEIds.pkl, this will generate the ActuatorEIds.json file
+output {
+  files {
+    ["SegmentEIds.json"] {
+      value = segmentEIds
+      renderer = new JsonRenderer {}
+    }
+  }
+}

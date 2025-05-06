@@ -1,0 +1,9 @@
+module m1cs.TargetGeneratorConfig
+
+typealias Type = "CONST"|"SQ"|"TRI"|"SIN"|"NOISE"
+
+type = "CONST"
+amplitude = 20.0
+period = 2.0
+offset = 0.5
+lpFilterFreq = 124.3

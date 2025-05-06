@@ -1,0 +1,26 @@
+module m1cs.actuators.OffloadMotorConfig
+
+import "MotorTypes.pkl"
+
+mode: MotorTypes.Mode = "CONT"
+
+contGain: Float = 1.0
+
+contThreshold: Float = 2.0
+
+discStart: Float = 3.0
+
+discStop: Float = 4.0
+
+operatingCurrent: Float = 5.0
+
+standbyCurrent: Float = 6.0
+
+limits: MotorTypes.MotorLimits = new {
+  offset = 1.4
+  scaleFactor = 1.2
+  upperLimit = -10.0
+  lowerLimit = 10.0
+}
+
+

@@ -1,0 +1,18 @@
+amends "pkl:test"
+
+import "../utils.pkl"
+
+facts {
+  ["toSegNum"] {
+    utils.toSegNum("s1") == 1
+    utils.toSegNum("s234") == 234
+    utils.toSegNum("s492") == 492
+    utils.toSegNum("s574") == 574
+  }
+  ["toSegName"] {
+    utils.toSegName(1) == "s1"
+    utils.toSegName(234) == "s234"
+    utils.toSegName(492) == "s492"
+    utils.toSegName(574) == "s574"
+  }
+}

@@ -1,0 +1,80 @@
+module m1cs.PositionLoopConfig
+
+import "MotorTypes.pkl"
+
+class SlewCtrl {
+  Kp:Float
+  Ki:Float
+  Kd:Float
+  FD:Float
+}
+
+class TrkCtrl {
+  Kp:Float
+  Ki:Float
+  Kd:Float
+  FD:Float
+  Kl:Float
+  FL:Float
+}
+
+class GainSchedule {
+  Kp: Float
+  Ki: Float
+  Kd: Float
+}
+
+///
+/// Defaults are set here
+///
+gainFactor: Float = 1.0
+
+slewCtrl = new SlewCtrl {
+  Kp = 1.0
+  Ki = 2.0
+  Kd = 3.0
+  FD = 4.0
+}
+trkCtrl = new TrkCtrl {
+  Kp = 1.0
+  Ki = 2.0
+  Kd = 3.0
+  FD = 4.0
+  Kl = 5.0
+  FL = 6.0
+}
+gainSchedule = new GainSchedule {
+  Kp = 1.0
+  Ki = 2.0
+  Kd = 3.0
+}
+
+trkIRParams {
+  0.0
+  1.0
+  2.0
+  3.0
+  4.0
+  5.0
+  6.0
+  7.0
+  8.0
+  9.0
+  10.0
+  11.0
+  12.0
+  13.0
+  14.0
+  15.0
+  16.0
+  17.0
+  18.0
+  19.0
+}
+
+limits: MotorTypes.MotorLimits = new {
+  offset = 2.4
+  scaleFactor = 1.23
+  upperLimit = -12.0
+  lowerLimit = 12.0
+}

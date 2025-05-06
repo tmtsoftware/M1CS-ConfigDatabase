@@ -1,0 +1,16 @@
+amends "pkl:test"
+
+import "../wh/WHItemsDictionary.pkl"
+
+local testEId = "3:SegmentEId"
+
+facts {
+  ["getWHSegmentConfigWithEId"] {
+    WHItemsDictionary.getWHSegmentConfigWithEid(testEId).key == "s3"
+    WHItemsDictionary.getWHSegmentConfigWithEid(testEId).second.segmentEId == testEId
+  }
+  ["getWHSegmentConfigWithLocation"] {
+    WHItemsDictionary.getWHItemConfigWithLocation(testEId, 2).key == "2"
+    WHItemsDictionary.getWHItemConfigWithLocation(testEId, 2).second.location == 2
+  }
+}

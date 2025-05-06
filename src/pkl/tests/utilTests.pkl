@@ -7,46 +7,45 @@ local r1 = List("A1", "A2", "A3", "B1", "B2", "B3")
 
 facts {
   ["checkSegId"] {
-    utils.checkSegName("A22") == true
-    utils.checkSegName("G22") == false
-    utils.checkSegName("A01") == true
-    utils.checkSegName("A00") == false
-    utils.checkSegName("A82") == true
-    utils.checkSegName("A83") == false
+    utils.checkCellName("A22") == true
+    utils.checkCellName("G22") == false
+    utils.checkCellName("A01") == true
+    utils.checkCellName("A00") == false
+    utils.checkCellName("A82") == true
+    utils.checkCellName("A83") == false
   }
   ["checkSegs"] {
-    utils.segments(List("A", "B"), 3) == r1
-    utils.segments(utils.sectors, utils.SEGMENTS_PER_SECTOR).length == utils.TOTAL_NUMBER_SEGMENTS
+    utils.createCellNames(List("A", "B"), 3) == r1
+    utils.createCellNames(utils.allSectors, utils.SEGMENTS_PER_SECTOR).length == utils.TOTAL_NUMBER_SEGMENTS_ON_TELESCOPE
   }
   ["sectorLetter"] {
-    utils.sectorLetter("A2") == "A"
-    utils.sectorLetter("F8") == "F"
-    utils.mirrorNumber("A2") == 2
-    utils.mirrorNumber("F8") == 8
+    utils.cellName("A2").sectorLetter == "A"
+    utils.cellName("C80").sectorLetter == "C"
+    utils.cellName("F8").sectorLetter == "F"
   }
   ["sectorNumber"] {
-    utils.sectorNumber("A2") == 1
-    utils.sectorNumber("F2") == 6
+    utils.cellName("A2").sectorNumber == 1
+    utils.cellName("F2").sectorNumber == 6
   }
   ["mirrorNumber"] {
-    utils.mirrorNumber("A1") == 1
-    utils.mirrorNumber("B1") == 1
-    utils.mirrorNumber("F82") == 82
+    utils.cellName("A1").mirrorNumber == 1
+    utils.cellName("B1").mirrorNumber == 1
+    utils.cellName("F82").mirrorNumber == 82
   }
   ["segmentNumber"] {
-    utils.segNum("A1") == 1
-    utils.segNum("B1") == 83
-    utils.segNum("C19") == 183
-    utils.segNum("B1") == utils.SEGMENTS_PER_SECTOR+1
-    utils.segNum("F82") == utils.TOTAL_NUMBER_SEGMENTS
+    utils.cellName("A1").segNum == 1
+    utils.cellName("B1").segNum == 83
+    utils.cellName("C19").segNum == 183
+    utils.cellName("B1").segNum == utils.SEGMENTS_PER_SECTOR+1
+    utils.cellName("F82").segNum == utils.TOTAL_NUMBER_SEGMENTS_ON_TELESCOPE
   }
   ["segmentName"] {
-    utils.getNameFromNum(1) == "A1"
-    utils.getNameFromNum(183) == "C19"
-    utils.getNameFromNum(328) == "D82"
-    utils.getNameFromNum(329) == "E1"
-    utils.getNameFromNum(411) == "F1"
-    utils.getNameFromNum(492) == "F82"
+    utils.getCellNameFromNum(1) == "A1"
+    utils.getCellNameFromNum(183) == "C19"
+    utils.getCellNameFromNum(328) == "D82"
+    utils.getCellNameFromNum(329) == "E1"
+    utils.getCellNameFromNum(411) == "F1"
+    utils.getCellNameFromNum(492) == "F82"
   }
   ["globalActuatorNumber"] {
     utils.globalActuatorNumber("A1", 1) == 1
@@ -110,4 +109,5 @@ facts {
     utils.globalSensorNumberToPair(4921) == Pair("F1", 1)
     utils.globalSensorNumberToPair(5904) == Pair("F82", 12)
   }
+
 }

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# First Eids
+echo "Writing SegmentEIds.json"
+pkl eval -m output/ segments/SegmentEIds.pkl
+
+echo "Writing ActuatorEIds.json"
+pkl eval -m output/ actuators/ActuatorEIds.pkl
+
+echo "Writing MirrorCellEIds.json"
+pkl eval -m output/ mirror/MirrorCellEIds.pkl
+
+echo "Writing ActuatorConfig.json"
+pkl eval -m output/ ActuatorConfig.pkl
+
+echo "Writing WHItemsConfig.json"
+pkl eval -m output/ WHItemsConfig.pkl
+
+echo "Writing MirrorConfig.json"
+pkl eval -m output/ MirrorConfig.pkl
