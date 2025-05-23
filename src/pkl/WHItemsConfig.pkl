@@ -7,7 +7,7 @@ import "wh/WHItemsDictionary.pkl"
 /// Then reference the Listing of 21 harnesses and modify the desired entries
 ///
 whItemsConfig: WHItemsDictionary.WHItemsConfig = (WHItemsDictionary.defaulWHItemsConfig) {
-  ["s1"] {
+  ["SN-001"] {
     whItems {
       ["1"] {
         gaugeRep = -22.0
@@ -18,6 +18,23 @@ whItemsConfig: WHItemsDictionary.WHItemsConfig = (WHItemsDictionary.defaulWHItem
     }
   }
 }
+
+
+// This uses the default idea and allows using Get to fetch an override or default
+hidden whItemsConfig2: WHItemsDictionary.WHItemsConfig = (WHItemsDictionary.overrides) {
+  ["SN-001"] {
+    whItems {
+      ["1"] {
+        gaugeRep = -22.0
+        strain {
+          offset = 123.4
+        }
+      }
+    }
+  }
+}
+
+//SN002 = WHItemsDictionary.get("SN-002")
 
 /// When called with pkl eval -m output/ WHParams.pkl, this will generate the WHParams.json file
 output {

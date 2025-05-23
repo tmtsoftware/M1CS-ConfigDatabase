@@ -41,19 +41,22 @@ typealias SegmentNum = Int((n) -> n >= 1 && n <= TOTAL_NUMBER_SEGMENTS)
 
 function toSegNum(segName: SegName): SegNum = segName.drop(SEGMENT_NAME_BASE.length).toInt()
 
-function toSegName(segNum: SegNum): SegName = SEGMENT_NAME_BASE + segNum.toString()
+function toSegName(segNum: SegNum): SegName = SEGMENT_NAME_BASE + segNum.toString().padStart(SEGMENT_NAME_NUM_WIDTH, "0")
 
-hidden const SEGMENT_NAME_BASE:String = "s"
-const SEGMENT_NAME_LENGTH:Int = 5  // Up to s574
+hidden const SEGMENT_NAME_BASE:String = "SN-"
+hidden const SEGMENT_NAME_NUM_WIDTH = 3  // The padding for segment name
+const SEGMENT_NAME_LENGTH:Int = 7  // Up to SN-001
 
 hidden const FAKE_SEGMENT_EID_ENDING = ":SegmentEId"
 
 
 // An ActName is letter A and a number like a1234
-typealias SegName = String((str) -> str.take(1) == SEGMENT_NAME_BASE && str.length <= SEGMENT_NAME_LENGTH)
+typealias SegName = String((str) -> str.take(SEGMENT_NAME_BASE.length) == SEGMENT_NAME_BASE && str.length <= SEGMENT_NAME_LENGTH)
 
 typealias SegNum = Int((n) -> n >= 1 && n <= MAX_SEGMENT_NUMBER)
 
+x = toSegName(1)
+y = toSegNum("SN-001")
 
 // List of all cellnames based on allSectors and SEGMENTS_PER_SECTOR
 function allSegmentsNameList():List<SegName> = new Dynamic {

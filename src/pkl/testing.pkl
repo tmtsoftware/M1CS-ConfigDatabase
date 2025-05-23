@@ -1,0 +1,26 @@
+class Config {
+  x = 1
+  y = 2
+}
+
+default:Config = new {}
+
+dconfigs: Mapping<String, Config> = new {}
+
+xconfigs = (dconfigs) {
+  ["bb"] {
+    x = 44
+  }
+}
+
+function configs(key: String): Config =
+  let ( x = xconfigs.toMap().getOrNull(key))
+    if (x == null) default else x
+
+
+x = configs("bb")
+
+
+y = configs("y")
+
+

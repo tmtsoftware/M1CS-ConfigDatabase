@@ -32,6 +32,14 @@ facts {
     utils.cellName("B1").mirrorNumber == 1
     utils.cellName("F82").mirrorNumber == 82
   }
+  ["toSegNum"] {
+    utils.toSegNum("SN-001") == 1
+    utils.toSegNum("SN-492") == 492
+  }
+  ["toSegName"] {
+    utils.toSegName(1) == "SN-001"
+    utils.toSegName(492) == "SN-492"
+  }
   ["segmentNumber"] {
     utils.cellName("A1").segNum == 1
     utils.cellName("B1").segNum == 83
@@ -39,7 +47,7 @@ facts {
     utils.cellName("B1").segNum == utils.SEGMENTS_PER_SECTOR+1
     utils.cellName("F82").segNum == utils.TOTAL_NUMBER_SEGMENTS_ON_TELESCOPE
   }
-  ["segmentName"] {
+  ["cellName"] {
     utils.getCellNameFromNum(1) == "A1"
     utils.getCellNameFromNum(183) == "C19"
     utils.getCellNameFromNum(328) == "D82"
